@@ -1,0 +1,10 @@
+﻿Name,Quantity,Component
+"Uarduino nano",1," Arduino Micro"
+"Dred",1,"Red LED"
+"Dgreen",1,"Green LED"
+"Dyellow",1,"Yellow LED"
+"Dblue",1,"Blue LED"
+"Ulcd i2c",1,"MCP23008-based, 32 LCD 16 x 2 (I2C)"
+"PIEZObuzzer",1," Piezo"
+"S1, S2, S3, S4",4," Pushbutton"
+"R1, R2, R3, R4",4,"220 Ω Resistor"
