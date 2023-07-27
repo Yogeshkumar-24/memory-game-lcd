@@ -343,6 +343,7 @@ void setup()
   byte b1 = EEPROM.read(0);
   byte b2 = EEPROM.read(1);
   high_score = (b1 << 8) + b2;
+ 
 
   //progress bar
    lcd.clear();
@@ -355,6 +356,12 @@ void setup()
     delay(10);
   }
   delay(1000);
+
+  // Instruction to the player
+  lcd.clear();
+  lcd.print("Press any key to");
+  lcd.setCursor(0, 1);
+  lcd.print("start the game");
 
   //Enable pull ups on inputs
 
@@ -438,19 +445,6 @@ void loop()
 
 {
 
-    lcd.clear();
-    lcd.setCursor(0, 1);  //(Column,Row)
-    lcd.print("Your Score: ");
-    lcd.setCursor(12, 1); 
-    lcd.print(gameRound);
-    if(gameRound > high_score) {
-    high_score = gameRound;
-    EEPROM.write(0, (high_score >> 8) & 0xFF);
-    EEPROM.write(1, high_score & 0xFF);
-    }
-
-    lcd.setCursor(0, 0);
-    lcd.print("High Score: " + (String)(high_score));
 
   
 
@@ -474,9 +468,26 @@ void loop()
 
   {
 
+
+
     // Play memory game and handle result
 
     if (play_memory() == true) {
+
+    lcd.clear();
+    lcd.setCursor(0, 1);  //(Column,Row)
+    lcd.print("Your Score: ");
+    lcd.setCursor(12, 1); 
+    lcd.print(gameRound);
+    if(gameRound > high_score) {
+    high_score = gameRound;
+    EEPROM.write(0, (high_score >> 8) & 0xFF);
+    EEPROM.write(1, high_score & 0xFF);
+    }
+
+    lcd.setCursor(0, 0);
+    lcd.print("High Score: " + (String)(high_score));
+
       play_winner(); // Player won, play winner tones
     }
 
@@ -486,6 +497,16 @@ void loop()
       lcd.clear();
       lcd.print("Game Over! ");
       delay(1000);
+
+          lcd.clear();
+    lcd.setCursor(0, 1);  //(Column,Row)
+    lcd.print("Your Score: ");
+    lcd.setCursor(12, 1); 
+    lcd.print(gameRound - 1);
+    lcd.setCursor(0, 0);
+    lcd.print("High Score: " + (String)(high_score));
+
+
       play_loser(); // Player lost, play loser tones
     }
 
